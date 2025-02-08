@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>xss</title>
 </head>
 <body style="background-color:black;">
     <script>
         var urlParams = new URLSearchParams(window.location.search);
-        var name = urlParams.get('name');
-        document.write(name);
+        var x = urlParams.get('x');
+        document.write(x);
     </script>
     <img src="bait.png" alt="This is bait">
 </body>

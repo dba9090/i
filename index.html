@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image</title>
+    <title>xss</title>
 </head>
-<body style="background-color: black; color: rgb(0, 0, 0);">
+<body>
     <script>
         var urlParams = new URLSearchParams(window.location.search);
-        var x = urlParams.get('x');
-        document.write(x);
+        var name = urlParams.get('name');
+        document.write(name);
     </script>
-    <img src="bait.png">
+    <img src="bait.png" alt="This is bait">
 </body>
 </html>
